@@ -87,6 +87,7 @@ const yAxis = d3.axisLeft().scale(yScale);
                 d3.select('#tooltip')
                     .html(html)
                     .attr('class', 'tooltip')
+                    .attr('data-date', date)
                     .style('bottom', padding * 2 + 'px')
                     .style('left', (xScale(getDate[i]) + (padding * 1.5)) + 'px')
                     .transition().duration(150).style('opacity', 1);
