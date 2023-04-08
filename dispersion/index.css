@@ -1,0 +1,14 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    position: relative;
+    text-align: center;
+}
+.axis-guide{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
