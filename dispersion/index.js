@@ -127,6 +127,7 @@ let yScale = d3.scaleTime().range([0, h]);
                             .style('color', 'red')
 
                             t.transition()
+                                .attr('data-year', date[i]['year'])
                                 .style('left', xScale(date[i]['year']) + 'px')
                                 .style('top', yScale(date[i]['time']) + 'px')
                                 .transition().duration(150).style('opacity', 1);
