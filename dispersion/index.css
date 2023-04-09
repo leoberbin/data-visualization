@@ -19,14 +19,21 @@ main{
     padding: 0;
 }
 #tooltip{
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
     width: 20%;
     height: 20%;
     border: .1rem solid aqua;
-    box-shadow: 0 0 .25rem black;
+    box-shadow: 0 0 .5rem black;
+    text-shadow: 0 0 .5rem gray;
+    color: black;
+    font-weight: bold;
     border-radius: 2%;
     position: absolute;
     top: 0;
     left: 0;
     background-color: rgba(0, 255, 255, 0.7);
+    padding: .5rem;
     opacity: 0;
 }

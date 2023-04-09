@@ -37,7 +37,11 @@ let yScale = d3.scaleTime().range([0, h]);
                     return {
                             time : new Date(0, 0, 1, 0, time[0], time[1]),
                             year : d['Year'],
-                            doping : d['Doping']
+                            minutes : d['Time'],
+                            name : d['Name'],
+                            nationality : d['Nationality'],
+                            doping : d['Doping'],
+                            link : d['URL']
                         };
                 });
                     xScale.domain([
@@ -81,6 +85,7 @@ let yScale = d3.scaleTime().range([0, h]);
                 .data(date)
                 .enter()
                 .append('circle')
+                .attr('id', (_,i) => i)
                 .attr('r', 7)
                 .attr('cy', (d) => yScale(d.time))
                 .attr('cx', (d) => xScale(d.year))
@@ -89,7 +94,53 @@ let yScale = d3.scaleTime().range([0, h]);
                 .attr('transform', ty)
                 .attr('fill', (d) => d.doping === "" ? '#AA00FF' : '#FFBD00')
                 .style('stroke', 'white')
+                .style('cursor', 'pointer')
                 .style('opacity', '.75')
+                .on('mouseover', (event) => {
+                    const i = event.target.id; 
+                    const t = d3.select('#tooltip');
+
+                        t.append('div')
+                            .text(date[i]['nationality'])
+                            .style('text-align', 'left')
+                            .style('width', '50%')
+
+                        t.append('div')
+                            .text(date[i]['year'])
+                            .style('text-align', 'right')
+                            .style('width', '50%')
+
+                        t.append('div')
+                            .text(date[i]['name'])
+                            .style('width', '100%')
+                            .style('text-align', 'center')
+                            .style('font-size', '1.25rem')
+
+                        t.append('div')
+                            .text(date[i]['doping'])
+                            .style('font-size', '.85rem')
+
+                        t.append('div')
+                            .text('CLICK')
+                            .style('width', '100%')
+                            .style('font-size', '.7rem')
+                            .style('color', 'red')
+
+                            t.transition()
+                                .style('left', xScale(date[i]['year']) + 'px')
+                                .style('top', yScale(date[i]['time']) + 'px')
+                                .transition().duration(150).style('opacity', 1);
+                })
+                .on('mouseout', () => {
+                    const t = d3.select('#tooltip');
+                        t.html('')
+                            .transition().duration(150).style('opacity', 0);
+                })
+                .on('click', (event) => {
+                    const i = event.target.id; 
+                    const link = date[i]['link']
+                        window.open(link, '_blank');
+                });
 
             legend.append('g')
                 .attr('class', 'legend')
@@ -119,5 +170,5 @@ let yScale = d3.scaleTime().range([0, h]);
             legend.select('g:last-child')
                 .select('rect')
                 .attr('fill','#AA00FF');
-    }
+    };
 }();
