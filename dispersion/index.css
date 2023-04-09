@@ -6,9 +6,27 @@ body{
 main{
     position: relative;
     text-align: center;
+    color: aqua;
+    background: linear-gradient(180deg, rgb(62, 62, 62), black);
+    border-radius: 1%;
+}
+.legend{
+    fill: aqua;
 }
 .axis-guide{
     position: absolute;
     margin: 0;
     padding: 0;
+}
+#tooltip{
+    width: 20%;
+    height: 20%;
+    border: .1rem solid aqua;
+    box-shadow: 0 0 .25rem black;
+    border-radius: 2%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 255, 255, 0.7);
+    opacity: 0;
 }

@@ -1,9 +1,9 @@
 !function(){
     var w = 800; 
     var h = 400; 
-    var p = 60; 
+    var p = 120; 
 
-    let main = d3.select('main');
+    const main = d3.select('main');
         
         main.append('h1')
             .attr('id', 'title')
@@ -15,17 +15,14 @@
         main.append('h4')
             .attr('class', 'axis-guide')
             .style('transform', 'rotate(270deg)')
-            .style('bottom', p * 2 + 'px')
-            .style('left', -p + 'px')
+            .style('bottom', p + 'px')
+            .style('left', 0)
             .text('Time in Minutes');
+        
+        main.append('div')
+            .attr('id', 'tooltip');
 
-        main.append('h4')
-            .attr('class', 'axis-guide')
-            .style('bottom', -p / 4 + 'px')
-            .style('left', w - p + 'px')
-            .text('Years');
-
-    let svg = main.append('svg')
+    const svg = main.append('svg')
         .attr('width', w + p)
         .attr('height', h + p)
 
@@ -56,7 +53,7 @@ let yScale = d3.scaleTime().range([0, h]);
                         d3.extent(date, d => {
                             return d.time;
                         })
-                    )
+                    );
                 ready();
             }); 
 
@@ -65,16 +62,20 @@ let yScale = d3.scaleTime().range([0, h]);
         var yAxis = d3.axisLeft(yScale).tickFormat(d3.timeFormat('%M:%S'));
 
             var tx = 'translate('+ p +',' + (h + p/2) + ')'; 
-            var ty = 'translate(' + p + ',' + p/2 + ')'
+            var ty = 'translate(' + p + ',' + p/2 + ')';
             svg.append('g')
                 .attr('transform', tx)
                 .attr('id', 'x-axis')
-                .call(xAxis)
+                .call(xAxis);
 
             svg.append('g')
                 .attr('transform', ty)
                 .attr('id', 'y-axis')
-                .call(yAxis)
+                .call(yAxis);
+
+            var xl = 50
+            const legend = svg.append('g')
+                            .attr('id', 'legend');
 
             svg.selectAll('circle')
                 .data(date)
@@ -83,9 +84,40 @@ let yScale = d3.scaleTime().range([0, h]);
                 .attr('r', 7)
                 .attr('cy', (d) => yScale(d.time))
                 .attr('cx', (d) => xScale(d.year))
+                .attr('data-xvalue', (d) => d.year)
+                .attr('data-yvalue', (d) => d.time)
                 .attr('transform', ty)
                 .attr('fill', (d) => d.doping === "" ? '#AA00FF' : '#FFBD00')
                 .style('stroke', 'white')
                 .style('opacity', '.75')
+
+            legend.append('g')
+                .attr('class', 'legend')
+                .attr('transform', 'translate(0, ' + (h / 2 - 30) + ')')
+                .append('text')
+                .text('No doping allegations')
+                .attr('x', w / 1.5);
+
+            legend.append('g')
+                .attr('class', 'legend')
+                .attr('transform', 'translate(0, ' + (h / 2) + ')')
+                .append('text')
+                .text('Riders with doping allegations')
+                .attr('x', w / 1.5);
+
+            legend.selectAll('g')
+                .append('rect')
+                .attr('width', 15)
+                .attr('height', 15)
+                .attr('x', w)
+                .attr('y', -12);
+
+            legend.select('g:first-child')
+                .select('rect')
+                .attr('fill','#FFBD00')
+                
+            legend.select('g:last-child')
+                .select('rect')
+                .attr('fill','#AA00FF');
     }
 }();
