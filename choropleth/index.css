@@ -1,0 +1,26 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    padding: 2.5% 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    font-weight: bold;
+}
+header{
+    text-align: center;
+}
+#tooltip{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2.5%;
+    padding: 0 1%;
+    color: rgb(27, 210, 195);
+    text-shadow: 0 0 .1rem black;
+    box-shadow: 0 0 .2rem black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
