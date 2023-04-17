@@ -1,0 +1,58 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    padding: 1.5rem;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+}
+.change-promise{
+    width: 15rem;
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.change-promise:hover{
+    cursor: pointer;
+}
+
+.change-promise:active{
+    transform: scale(1.25);
+    color: blue;
+}
+#title{
+    margin: 0
+}
+main{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+#tooltip{
+    width: 20%;
+    height: 20%;
+    background-color: #000000cc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(181, 181, 181);
+    text-align: center;
+    opacity: 0;
+}
+rect{
+    cursor: pointer;
+}
