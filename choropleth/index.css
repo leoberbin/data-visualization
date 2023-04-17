@@ -8,6 +8,7 @@ body{
     align-items: center;
     color: gray;
     font-weight: bold;
+    overflow: scroll;
 }
 header{
     text-align: center;
